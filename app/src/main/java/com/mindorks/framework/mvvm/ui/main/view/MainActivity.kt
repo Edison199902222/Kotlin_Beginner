@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setupViewModel()
         setupObserver()
     }
-
+    // 创建adapter
     private fun setupUI() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MainAdapter(arrayListOf())
@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
+        // 观察user的data，使用了livedata
+        // 不同user的状态，会有不同的界面
         mainViewModel.getUsers().observe(this, Observer {
             when (it.status) {
                 Status.SUCCESS -> {
@@ -70,9 +72,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
+        // ViewModelProviders 是一个class 里面存储view model的
         mainViewModel = ViewModelProviders.of(
             this,
-            ViewModelFactory(ApiHelper(ApiServiceImpl()))
+            ViewModelFactory(ApiHelper(ApiServiceImpl())) // 利用工厂模式制造view model
         ).get(MainViewModel::class.java)
     }
 }

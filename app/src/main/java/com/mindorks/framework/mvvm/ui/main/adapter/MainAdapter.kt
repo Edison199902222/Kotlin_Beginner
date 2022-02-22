@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_layout.view.*
 class MainAdapter(
     private val users: ArrayList<User>
 ) : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
-
+    // 和XML对应的东西进行绑定
     class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(user: User) {
             itemView.textViewUserName.text = user.name
@@ -32,7 +32,7 @@ class MainAdapter(
         )
 
     override fun getItemCount(): Int = users.size
-
+    // 给定位置，call blind进行绑定
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) =
         holder.bind(users[position])
 
